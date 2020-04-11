@@ -1,0 +1,23 @@
+table, tr, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.buttonBuy {
+    background-color: white;
+    border-radius: 16px;
+    border: 1px solid black;
+}
+
+.buttonBuy:hover:enabled {
+    background-color:blue;
+    color: white;
+    border-radius: 16px;
+    transition: background-color ease-in-out 300ms, color ease-in-out 300ms;
+}
+
+.buttonBuy:disabled {
+    background-color:gray;
+    color: white;
+    border-radius: 16px;    
+}
