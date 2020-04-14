@@ -8,6 +8,8 @@ import crazy from './views/Images/crazyRich.png';
 import educated from './views/Images/educated.png';
 import brave from './views/Images/brave.png';
 import './bootstrap.css';
+import InputScreen from './views/screens/InputScreen';
+import AuthScreen from './views/screens/AuthScreen';
 
 function App() {
  
@@ -75,14 +77,14 @@ const renderBuku = () => {
   )
 }
 
-return (
-  <div className="app">
-    <h1 className='text-center mt-5 mb-5'>Hello world!</h1> 
-    <div className="row">
-        {renderBuku()}
-    </div>
-  </div>
-)
+// return (
+//   <div className="app">
+//     <h1 className='text-center mt-5 mb-5'>Hello world!</h1> 
+//     <div className="row">
+//         {renderBuku()}
+//     </div>
+//   </div>
+// )
 
 // const renderProduct = () => {
 //   return (
@@ -98,6 +100,14 @@ return (
 
 //   </div>
 // )
+
+return(
+    <div>
+      {/* <CounterScreen/> */}
+      {/* <InputScreen/> */}
+      <AuthScreen/>
+    </div>
+  )
   ;
 }
 
