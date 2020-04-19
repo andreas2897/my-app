@@ -1,0 +1,21 @@
+{
+    "posts": [],
+    "comments": [],
+    "users": [
+      {
+        "id": 1,
+        "username": "pikachu",
+        "password": "pass",
+        "fullName": "Admin aja",
+        "role": "admin"
+      },
+      {
+        "id": 2,
+        "username": "seto",
+        "password": "password",
+        "fullName": "seto haha",
+        "role": "user"
+      }
+    ]
+  }
+  
