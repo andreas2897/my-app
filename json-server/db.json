@@ -1,21 +1,27 @@
 {
-    "posts": [],
-    "comments": [],
-    "users": [
-      {
-        "id": 1,
-        "username": "pikachu",
-        "password": "pass",
-        "fullName": "Admin aja",
-        "role": "admin"
-      },
-      {
-        "id": 2,
-        "username": "seto",
-        "password": "password",
-        "fullName": "seto haha",
-        "role": "user"
-      }
-    ]
-  }
-  
+  "posts": [],
+  "comments": [],
+  "users": [
+    {
+      "id": 1,
+      "username": "pikachu",
+      "password": "pass",
+      "fullName": "Admin aja",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "username": "seto",
+      "password": "password",
+      "fullName": "seto haha",
+      "role": "user"
+    },
+    {
+      "username": "ayam",
+      "fullname": "ayamgoreng",
+      "password": "123",
+      "role": "admin",
+      "id": 3
+    }
+  ]
+}

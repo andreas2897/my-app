@@ -22,7 +22,7 @@ class RegisterScreen extends React.Component {
       });
   }
 
-  registHandler = () => {
+  registerHandler = () => {
     const {
       users,
       regisUsername,
@@ -38,12 +38,12 @@ class RegisterScreen extends React.Component {
 
       if (i == users.length - 1) {
         Axios.post(`${API_URL}/users`, {
-          regisUsername,
-          regisFullname,
-          regisPassword,
-          regisRole,
+          username : regisUsername,
+          fullname : regisFullname,
+          password :regisPassword,
+          role :regisRole,
         })
-        alert("data masuk")
+        
           .then((res) => {
             console.log(res);
           })

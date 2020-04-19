@@ -5,6 +5,7 @@ import { API_URL } from "../../constants/API";
 class ProfileScreen extends React.Component {
   state = {
     users: [],
+    allUsers: [],
   };
 
   getDataHandler = () => {
@@ -77,33 +78,53 @@ class ProfileScreen extends React.Component {
   };
 
   componentDidMount() {
-
+    // buat orang
     Axios.get(`${API_URL}/users/`, {
       params: {
-        username: this.props.match.params.username
-      }
+        username: this.props.match.params.username,
+      },
     })
-      .then(res => {
+      .then((res) => {
         console.log(res);
         this.setState({ users: res.data });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
 
-      Axios.get(`${API_URL}/users`)
-      .then(res => {
+    //buat tabel
+
+    Axios.get(`${API_URL}/users`)
+      .then((res) => {
         console.log(res);
-        this.setState({ users: res.data });
+        this.setState({ allUsers: res.data });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
 
-  renderUserData = () => {
+  renderProfile = () => {
     const { users } = this.state;
-    return users.map((user, index) => {
+    return users.map((user) => {
+      return (
+        <div className="d-flex flex-column justify-content-center align-items-center mt-5">
+          <h2 className="mb-3"> Welcome, {user.fullName} </h2>
+          <form className="form-group mt-2" style={{ width: "30%" }}>
+            <h3> Username : {user.username} </h3>
+
+            <h3> Password : {user.password} </h3>
+
+            <h3> Role : {user.role} </h3>
+          </form>
+        </div>
+      );
+    });
+  };
+
+  renderUserData = () => {
+    const { allUsers } = this.state;
+    return allUsers.map((user, index) => {
       return (
         <tr>
           <td> {index + 1} </td>
@@ -115,11 +136,7 @@ class ProfileScreen extends React.Component {
     });
   };
 
-  
   render() {
-
-    const { users } = this.state;
-    
     return (
       <div>
         {/* <div className="container">
@@ -144,30 +161,8 @@ class ProfileScreen extends React.Component {
           className="btn btn-primary"
         /> */}
 
-        <div className="d-flex flex-column justify-content-center align-items-center mt-5">
-          <h2 className="mb-3"> Welcome, {users.username} </h2>
-          <form className="form-group mt-2" style={{ width: "30%" }}>
-            <label> Username </label>
-            <input
-              type="text"
-              class="form-control mb-3"
-              value={users.username}
-            />
-            <label> Password </label>
-            <input
-              type="text"
-              class="form-control mb-3"
-              aria-describedby="textHelp"
-              value={users.password}
-            />
-            <label> Role </label>
-            <input
-              type="text"
-              class="form-control mb-3"
-              aria-describedby="textHelp"
-              value={users.role}
-            />
-          </form>
+        <div>
+          <center>{this.renderProfile()}</center>
         </div>
 
         <div className="d-flex flex-column align-items-center justify-content-center">
