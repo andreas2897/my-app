@@ -2,6 +2,8 @@ import React from "react";
 import Axios from "axios";
 import { API_URL } from "../../constants/API";
 import { Redirect } from "react-router-dom";
+import { usernameInputHandler } from "../../redux/actions";
+import { connect } from "react-redux";
 
 class LoginScreenBaru extends React.Component {
   state = {
@@ -26,6 +28,7 @@ class LoginScreenBaru extends React.Component {
 
   loginHandler = () => {
     const { loginUsername, loginPassword, users } = this.state;
+    
     for (let i = 0; i < users.length; i++) {
       if (
         users[i].username == loginUsername &&
@@ -35,9 +38,10 @@ class LoginScreenBaru extends React.Component {
         this.setState({
           isLoggedIn: true,
           currentUsername: users[i].username,
-          loginUsername: "",
+          loginUsername: "", 
           loginPassword: "",
         });
+        this.props.usernameInputHandler(loginUsername)
         break;
       }
 
@@ -89,4 +93,14 @@ class LoginScreenBaru extends React.Component {
   }
 }
 
-export default LoginScreenBaru;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+const mapDispatchToProps = {
+  usernameInputHandler,
+};
+
+export default connect(null, mapDispatchToProps)(LoginScreenBaru);

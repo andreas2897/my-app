@@ -1,4 +1,5 @@
 import React from "react"
+import {connect} from "react-redux"
 
 class InputScreen extends React.Component {
     state = {
@@ -14,7 +15,8 @@ class InputScreen extends React.Component {
             this.setState({ [field]: e.target.value})
         }
         return (
-            <div>
+            <div className="container">
+                <h1>{this.haloDunia}</h1>
                 <h1>input screen</h1>
                 <h3>Welcome {username}</h3>
                 <h3>Email : {email}</h3>
@@ -31,4 +33,10 @@ class InputScreen extends React.Component {
     }
 }
 
-export default InputScreen
+const mapStateToProps = state => {
+    return{
+      haloDunia: state.haha.todoINput
+    }
+  }
+
+export default connect(mapStateToProps)( InputScreen )
