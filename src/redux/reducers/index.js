@@ -3,6 +3,6 @@ import todo from "./todo";
 import user from "./user";
 
 export default combineReducers({
-  haha: todo,
+  todo: todo,
   user,
 });

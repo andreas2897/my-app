@@ -2,7 +2,7 @@ import React from "react";
 import Axios from "axios";
 import { API_URL } from "../../constants/API";
 import { Redirect } from "react-router-dom";
-import { usernameInputHandler } from "../../redux/actions";
+import { usernameInputHandler, loginHandler } from "../../redux/actions";
 import { connect } from "react-redux";
 
 class LoginScreenBaru extends React.Component {
@@ -26,29 +26,40 @@ class LoginScreenBaru extends React.Component {
       });
   }
 
-  loginHandler = () => {
-    const { loginUsername, loginPassword, users } = this.state;
-    
-    for (let i = 0; i < users.length; i++) {
-      if (
-        users[i].username == loginUsername &&
-        users[i].password == loginPassword
-      ) {
-        alert(`Welcome ${loginUsername}`);
-        this.setState({
-          isLoggedIn: true,
-          currentUsername: users[i].username,
-          loginUsername: "", 
-          loginPassword: "",
-        });
-        this.props.usernameInputHandler(loginUsername)
-        break;
-      }
+  // loginHandler = () => {
+  //   const { loginUsername, loginPassword, users } = this.state;
 
-      if (i == users.length - 1) {
-        alert("User tidak ada atau password salah");
-      }
-    }
+  //   for (let i = 0; i < users.length; i++) {
+  //     if (
+  //       users[i].username == loginUsername &&
+  //       users[i].password == loginPassword
+  //     ) {
+  //       alert(`Welcome ${loginUsername}`);
+  //       this.setState({
+  //         isLoggedIn: true,
+  //         currentUsername: users[i].username,
+  //         loginUsername: "",
+  //         loginPassword: "",
+  //       });
+  //       this.props.usernameInputHandler(loginUsername)
+  //       break;
+  //     }
+
+  //     if (i == users.length - 1) {
+  //       alert("User tidak ada atau password salah");
+  //     }
+  //   }
+  // };
+
+  loginHandler = () => {
+    const { username, password } = this.state;
+
+    const userData = {
+      username,
+      password,
+    };
+
+    this.props.onlogin(userData);
   };
 
   render() {
@@ -59,6 +70,7 @@ class LoginScreenBaru extends React.Component {
           <center>
             <div className="card p-5" style={{ width: "400px" }}>
               <h4>Login</h4>
+              <p>username : {this.props.user.username}</p>
               <input
                 value={this.state.loginUsername}
                 className="form-control mt-2"
@@ -101,6 +113,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   usernameInputHandler,
+  onlogin: loginHandler,
 };
 
-export default connect(null, mapDispatchToProps)(LoginScreenBaru);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreenBaru);

@@ -16,11 +16,14 @@ import HomeScreen from "./views/screens/HomeScreen";
 import PageNotFound from "./views/screens/PageNotFound";
 import Navbar from "./views/component/Navbar";
 import ProfileScreen from "./views/screens/ProfileScreen";
-import RegisterScreen from "./views/RegisterScreen";
+import RegisterScreen from "./views/screens/RegisterScreen";
 import LoginScreenBaru from "./views/screens/LoginScreenBaru";
 import ToDoReduxScreen from "./views/screens/ToDoReduxScreen";
+import Cookie from "universal-cookie";
 
-function App() {
+const cookieObject = new Cookie();
+
+class App extends React.Component {
   // let arrProduct = [
   //   {
   //     nama : 'sepatu',
@@ -108,39 +111,25 @@ function App() {
 
   //   </div>
   // )
-
-  return (
-    // <div>
-    //   {/* <CounterScreen/> */}
-    //   {/* <InputScreen/> */}
-    //   {/* <AuthScreen/> */}
-    //   {/* <LifecycleScreen/> */}
-    // </div>
-
-    // <BrowserRouter>
-    // <Navbar />
-    //   <Switch>
-    //     <Route exact path="/home" component={HomeScreen} />
-    //     <Route exact path="/auth" component={AuthScreen} />
-    //     <Route exact path="/input" component={InputScreen} />
-    //     <Route exact path="/counter" component={CounterScreen} />
-    //     <Route exact path="/profile/:username" component={ProfileScreen} />
-    //     <Route exact path="/todo" component={ToDoReduxScreen} />
-    //     <Route exact path="*" component={PageNotFound} />
-
-    //   </Switch>
-    // </BrowserRouter>
-    // )
-
-    <BrowserRouter>
-      <Navbar />
-      <Switch>
-        <Route exact path="/login" component={LoginScreenBaru} />
-        <Route exact path="/register" component={RegisterScreen} />
-        <Route exact path="/prof/:username" component={ProfileScreen} />
-      </Switch>
-    </BrowserRouter>
-  );
+  render() {
+    return (
+      <BrowserRouter>
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={HomeScreen} />
+          <Route exact path="/auth" component={AuthScreen} />
+          <Route exact path="/input" component={InputScreen} />
+          <Route exact path="/counter" component={CounterScreen} />
+          <Route exact path="/profile/:username" component={ProfileScreen} />
+          <Route exact path="/todo" component={ToDoReduxScreen} />
+          <Route exact path="/login" component={LoginScreenBaru} />
+          <Route exact path="/register" component={RegisterScreen} />
+          <Route exact path="/prof/:username" component={ProfileScreen} />
+          <Route exact path="*" component={PageNotFound} />
+        </Switch>
+      </BrowserRouter>
+    );
+  }
 }
 
 // let arr = ["tokyo", "bandung", "jakarta"]

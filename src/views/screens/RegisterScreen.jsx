@@ -1,6 +1,6 @@
 import React from "react";
 import Axios from "axios";
-import { API_URL } from "../constants/API";
+import { API_URL } from "../../constants/API";
 
 class RegisterScreen extends React.Component {
   state = {
@@ -38,12 +38,12 @@ class RegisterScreen extends React.Component {
 
       if (i == users.length - 1) {
         Axios.post(`${API_URL}/users`, {
-          username : regisUsername,
-          fullname : regisFullname,
-          password :regisPassword,
-          role :regisRole,
+          username: regisUsername,
+          fullname: regisFullname,
+          password: regisPassword,
+          role: regisRole,
         })
-        
+
           .then((res) => {
             console.log(res);
           })
