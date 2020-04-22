@@ -22,6 +22,13 @@
       "password": "123",
       "role": "admin",
       "id": 3
+    },
+    {
+      "username": "ilham",
+      "fullName": "ilhamm",
+      "password": "123123",
+      "role": "user",
+      "id": 4
     }
   ]
 }

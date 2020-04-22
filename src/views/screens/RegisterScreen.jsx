@@ -1,6 +1,8 @@
 import React from "react";
 import Axios from "axios";
 import { API_URL } from "../../constants/API";
+import { registHandler } from "../../redux/actions";
+import { connect } from "react-redux";
 
 class RegisterScreen extends React.Component {
   state = {
@@ -11,54 +13,63 @@ class RegisterScreen extends React.Component {
     regisRole: "",
   };
 
-  componentDidMount() {
-    Axios.get(`${API_URL}/users`)
-      .then((res) => {
-        console.log(res);
-        this.setState({ users: res.data });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+  // componentDidMount() {
+  //   Axios.get(`${API_URL}/users`)
+  //     .then((res) => {
+  //       console.log(res);
+  //       this.setState({ users: res.data });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
 
   registerHandler = () => {
+    
     const {
-      users,
       regisUsername,
       regisFullname,
       regisPassword,
       regisRole,
     } = this.state;
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].username == regisUsername) {
-        alert("Username sudah ada");
-        break;
-      }
+    const userData = {
+      regisUsername,
+      regisFullname,
+      regisPassword,
+      regisRole,
+    };
+    // alert(userData.regisFullname)
+    this.props.onRegis(userData);
 
-      if (i == users.length - 1) {
-        Axios.post(`${API_URL}/users`, {
-          username: regisUsername,
-          fullname: regisFullname,
-          password: regisPassword,
-          role: regisRole,
-        })
+    // for (let i = 0; i < users.length; i++) {
+    //   if (users[i].username == regisUsername) {
+    //     alert("Username sudah ada");
+    //     break;
+    //   }
 
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    }
+    //   if (i == users.length - 1) {
+    //     Axios.post(`${API_URL}/users`, {
+    //       username: regisUsername,
+    //       fullname: regisFullname,
+    //       password: regisPassword,
+    //       role: regisRole,
+    //     })
 
-    this.setState({
-      username: "",
-      fullName: "",
-      password: "",
-      role: "",
-    });
+    //       .then((res) => {
+    //         console.log(res);
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //       });
+    //   }
+    // }
+
+    // this.setState({
+    //   username: "",
+    //   fullName: "",
+    //   password: "",
+    //   role: "",
+    // });
   };
 
   render() {
@@ -113,4 +124,14 @@ class RegisterScreen extends React.Component {
   }
 }
 
-export default RegisterScreen;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+const mapDispatchToProps = {
+  onRegis: registHandler,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterScreen);

@@ -11,6 +11,7 @@ export const usernameInputHandler = (text) => {
 export const loginHandler = (userData) => {
   return (dispatch) => {
     const { username, password } = userData;
+
     Axios.get(`${API_URL}/users`, {
       params: {
         username,
@@ -18,6 +19,7 @@ export const loginHandler = (userData) => {
       },
     })
       .then((res) => {
+        alert(res.data.length);
         if (res.data.length > 0) {
           dispatch({
             type: "ON_LOGIN_SUCCESS",
@@ -25,9 +27,46 @@ export const loginHandler = (userData) => {
           });
         } else {
           dispatch({
-            type: "ON_LOGIN_SUCCESS",
+            type: "ON_LOGIN_FAIL",
             payload: "username atau password salah",
           });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const registHandler = (userData) => {
+  return (dispatch) => {
+    const { regisUsername, regisFullname, regisPassword, regisRole } = userData;
+    Axios.get(`${API_URL}/users`, {
+      params: {
+        username: regisUsername,
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        // alert(res.data.length);
+        if (res.data.length == 0) {
+          Axios.post(`${API_URL}/users`, {
+            username: regisUsername,
+            fullName: regisFullname,
+            password: regisPassword,
+            role: regisRole,
+          })
+            .then((res) => {
+              dispatch({
+                type: "ON_LOGIN_SUCCESS",
+                payload: res.data,
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          alert("sudah ada yang make usernamenya");
         }
       })
       .catch((err) => {
