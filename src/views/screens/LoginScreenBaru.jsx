@@ -4,6 +4,9 @@ import { API_URL } from "../../constants/API";
 import { Redirect } from "react-router-dom";
 import { usernameInputHandler, loginHandler } from "../../redux/actions";
 import { connect } from "react-redux";
+import Cookie from "universal-cookie"
+
+const cookieObject = new Cookie();
 
 class LoginScreenBaru extends React.Component {
   state = {
@@ -15,16 +18,16 @@ class LoginScreenBaru extends React.Component {
     isLoggedIn: false,
   };
 
-  componentDidMount() {
-    Axios.get(`${API_URL}/users`)
-      .then((res) => {
-        console.log(res);
-        this.setState({ users: res.data });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+  // componentDidMount() {
+  //   Axios.get(`${API_URL}/users`)
+  //     .then((res) => {
+  //       console.log(res);
+  //       this.setState({ users: res.data });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
 
   // loginHandler = () => {
   //   const { loginUsername, loginPassword, users } = this.state;
@@ -62,9 +65,17 @@ class LoginScreenBaru extends React.Component {
     this.props.onlogin(userData);
   };
 
+ 
+  componentDidUpdate(){
+    if(this.props.user.id) {
+      cookieObject.set("authData", JSON.stringify(this.props.user))
+    }
+  }
+
   render() {
-    const { isLoggedIn, currentUsername } = this.state;
-    if (!isLoggedIn) {
+    // if (!this.props.user.id){
+    // const { isLoggedIn, currentUsername } = this.state;
+    // if (!isLoggedIn) {
       return (
         <div>
           <center>
@@ -99,11 +110,14 @@ class LoginScreenBaru extends React.Component {
           </center>
         </div>
       );
-    } else {
-      return <Redirect to={`prof/${currentUsername}`} />;
-    }
+    // } else {
+    //   return <Redirect to={`prof/${currentUsername}`} />;
+    // } else {
+    //   return <div>...</div>
+    // }
   }
-}
+  }
+
 
 const mapStateToProps = (state) => {
   return {

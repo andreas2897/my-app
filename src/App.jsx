@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
 import TableProduct from "./views/component/TableProduct";
 import CounterScreen from "./views/screens/CounterScreen";
 import ProductCard from "./views/component/ProductCard";
@@ -20,6 +20,8 @@ import RegisterScreen from "./views/screens/RegisterScreen";
 import LoginScreenBaru from "./views/screens/LoginScreenBaru";
 import ToDoReduxScreen from "./views/screens/ToDoReduxScreen";
 import Cookie from "universal-cookie";
+import { connect } from "react-redux";
+import { userKeepLogin } from "./redux/actions";
 
 const cookieObject = new Cookie();
 
@@ -111,6 +113,15 @@ class App extends React.Component {
 
   //   </div>
   // )
+
+  componentDidMount() {
+    let cookieResult = cookieObject.get("authData")
+    console.log(cookieResult)
+    if (cookieResult){
+    this.props.userKeepLogin(cookieResult)
+    }
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -139,4 +150,14 @@ class App extends React.Component {
 //   </div>
 // )
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+const mapDispatchToProps = {
+  userKeepLogin,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));

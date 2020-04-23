@@ -19,7 +19,6 @@ export const loginHandler = (userData) => {
       },
     })
       .then((res) => {
-        alert(res.data.length);
         if (res.data.length > 0) {
           dispatch({
             type: "ON_LOGIN_SUCCESS",
@@ -48,7 +47,7 @@ export const registHandler = (userData) => {
     })
       .then((res) => {
         console.log(res.data);
-        // alert(res.data.length);
+
         if (res.data.length == 0) {
           Axios.post(`${API_URL}/users`, {
             username: regisUsername,
@@ -72,5 +71,39 @@ export const registHandler = (userData) => {
       .catch((err) => {
         console.log(err);
       });
+  };
+};
+
+export const userKeepLogin = (userData) => {
+  return (dispatch) => {
+    Axios.get(`${API_URL}/users`, {
+      params: {
+        id: userData.id,
+      },
+    })
+      .then((res) => {
+        alert(res.data.length);
+        if (res.data.length > 0) {
+          dispatch({
+            type: "ON_LOGIN_SUCCESS",
+            payload: res.data[0],
+          });
+        } else {
+          dispatch({
+            type: "ON_LOGIN_FAIL",
+            payload: "username atau password salah",
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const logoutHandler = (userData) => {
+  return {
+    type: "ON_LOGOUT",
+    payload: userData,
   };
 };
