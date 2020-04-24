@@ -9,8 +9,23 @@ const cookiesObject = new Cookie()
 
 
 class Navbar extends React.Component {
+  state = {
+    id : "",
+    username: "",
+    fullName: "",
+    role:"",
+  }
 
-  logoutDataHandler = (userData) => {
+  logoutDataHandler = () => {
+    const {id, username, fullName, role} = this.state
+
+    let userData = {
+      id, 
+      username, 
+      fullName, 
+      role,
+    }
+
     this.props.logoutHandler(userData)
     cookiesObject.remove("authData")
   }

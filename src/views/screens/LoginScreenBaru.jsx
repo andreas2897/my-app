@@ -55,13 +55,13 @@ class LoginScreenBaru extends React.Component {
   // };
 
   loginHandler = () => {
-    const { username, password } = this.state;
+    const { loginUsername, loginPassword } = this.state;
 
     const userData = {
-      username,
-      password,
+      loginUsername,
+      loginPassword,
     };
-
+    
     this.props.onlogin(userData);
   };
 

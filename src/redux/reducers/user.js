@@ -17,8 +17,8 @@ export default (state = init_state, action) => {
   } else if (action.type == "ON_LOGIN_FAIL") {
     return { ...state, errMsg: action.payload };
   } else if (action.type == "ON_LOGOUT") {
-    const { username, fullName, role } = action.payload;
-    return { ...state, username, fullName, role };
+    const { id, username, fullName, role } = action.payload;
+    return { ...state, id, username, fullName, role };
   } else {
     return { ...state };
   }

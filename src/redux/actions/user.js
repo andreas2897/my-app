@@ -10,15 +10,15 @@ export const usernameInputHandler = (text) => {
 
 export const loginHandler = (userData) => {
   return (dispatch) => {
-    const { username, password } = userData;
-
+    const { loginUsername, loginPassword } = userData;
     Axios.get(`${API_URL}/users`, {
       params: {
-        username,
-        password,
+        username: loginUsername,
+        password: loginPassword,
       },
     })
       .then((res) => {
+        console.log(res.data)
         if (res.data.length > 0) {
           dispatch({
             type: "ON_LOGIN_SUCCESS",
@@ -82,7 +82,7 @@ export const userKeepLogin = (userData) => {
       },
     })
       .then((res) => {
-        alert(res.data.length);
+       
         if (res.data.length > 0) {
           dispatch({
             type: "ON_LOGIN_SUCCESS",
